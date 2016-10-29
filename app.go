@@ -9,6 +9,7 @@ func main() {
     http.ListenAndServe(":8080", nil)
 }
 
+// Download data.zip
 func data(w http.ResponseWriter, r *http.Request) {
     switch r.Method {
     case "GET":
