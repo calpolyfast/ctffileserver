@@ -1,18 +1,26 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/data.zip", data)
+	http.HandleFunc("/file", file)
 	http.ListenAndServe(":8080", nil)
 }
 
 // Download data.zip
-func data(w http.ResponseWriter, r *http.Request) {
+func file(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case "GET":
-		http.ServeFile(w, r, "./files/data.zip")
+		fileName := r.URL.Query().Get("name")
+		filePath := "./files/" + fileName
+
+		// Set response headers for zip file
+		w.Header().Set("Content-Type", "applicaiton/zip")
+		w.Header().Set("Content-Disposition", "attachment; filename='"+fileName+"'")
+
+		http.ServeFile(w, r, filePath)
 	}
 }
