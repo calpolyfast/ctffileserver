@@ -3,7 +3,9 @@ Our simple web server that give us download links to our files on S3
 
 ## Configuring Credentials
 
-Before using this, configure credentials The best way to configure credentials on a development machine is to use the `~/.aws/credentials` file, which might look like:
+**Before using this, configure credentials.**
+
+The best way to configure credentials on a development machine is to use the `~/.aws/credentials` file, which might look like:
 
 ```
 [default]
