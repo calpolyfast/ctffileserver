@@ -33,6 +33,16 @@ func file(w http.ResponseWriter, r *http.Request) {
 		// Create new s3 instance to work with
 		svc := s3.New(session.New(&aws.Config{Region: aws.String("us-west-2")}))
 
+		// Check if object exists
+		_, err := svc.HeadObject(&s3.HeadObjectInput{
+			Bucket: aws.String(bucket),
+		    Key:    aws.String(fileName),
+		})
+		if err != nil {
+			http.Error(w, "File Does Not Exist", http.StatusBadRequest)
+			return
+		}
+
 		// Create object request to perform actions on
 		req, _ := svc.GetObjectRequest(&s3.GetObjectInput{
 		    Bucket: aws.String(bucket),
