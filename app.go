@@ -2,9 +2,12 @@ package main
 
 import (
 	"log"
-	"os"
+	"time"
 	"net/http"
 	"github.com/gorilla/mux"
+	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/session"
+	"github.com/aws/aws-sdk-go/service/s3"
 )
 
 func main() {
@@ -20,18 +23,28 @@ func file(w http.ResponseWriter, r *http.Request) {
 	case "GET":
 		vars := mux.Vars(r)
 		fileName := vars["name"]
-		filePath := "./files/" + fileName
+		bucket := r.URL.Query().Get("bucket")
 
-		// Check if file exists
-		if _, err := os.Stat(filePath); os.IsNotExist(err) {
-			http.Error(w, "File Does Not Exist", http.StatusBadRequest)
-			return
+		// Check if bucket name given
+		if len(bucket) <= 0 {
+			bucket = "calpolyfast-ctf-fall16"
 		}
 
-		// Set response headers for zip file
-		w.Header().Set("Content-Type", "applicaiton/zip")
-		w.Header().Set("Content-Disposition", "attachment; filename='"+fileName+"'")
+		// Create new s3 instance to work with
+		svc := s3.New(session.New(&aws.Config{Region: aws.String("us-west-2")}))
 
-		http.ServeFile(w, r, filePath)
+		// Create object request to perform actions on
+		req, _ := svc.GetObjectRequest(&s3.GetObjectInput{
+		    Bucket: aws.String(bucket),
+		    Key:    aws.String(fileName),
+		})
+
+		// Get url for file that expires after 30 minutes
+		urlStr, err := req.Presign(30 * time.Minute)
+		if err != nil {
+		    log.Println("Failed to sign request", err)
+		}
+
+		http.Redirect(w, r, urlStr, http.StatusSeeOther)
 	}
 }
