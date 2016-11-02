@@ -1,6 +1,16 @@
 # CTF File Server
 Our simple web server that give us download links to our files on S3
 
+## URLs
+
+**Normal URL**: /file/{name}
+
+{name} = name of the file in S3
+
+**URL with bucket**: /file/{name}?bucket={bucketname}
+
+{bucketname} = name of the bucket
+
 ## Configuring Credentials
 
 **Before using this, configure credentials.**
