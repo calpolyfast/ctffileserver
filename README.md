@@ -14,6 +14,7 @@ Ex. 35.160.61.27:8080/file/data.zip
 {folder} = name of the folder the file is in
 
 Ex. 35.160.61.27:8080/file/data.zip?folder=forensics
+
 35.160.61.27:8080/file/data.zip?folder=forensics/q1/
 
 **URL with bucket**: /file/{name}?bucket={bucketname}
