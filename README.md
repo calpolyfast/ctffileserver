@@ -3,21 +3,21 @@ Our simple web server that give us download links to our files on S3
 
 ## URLs
 
-**Normal URL**: /file/{name}
+**Normal URL**: /{name}
 
 {name} = name of the file in S3
 
-Ex. 35.160.61.27:8080/file/data.zip
+Ex. files.calpolyfast.com/data.zip
 
-**URL with folder**: /file/{name}?folder={foldername}
+**URL with folder**: /{name}?folder={foldername}
 
 {folder} = name of the folder the file is in
 
-Ex. 35.160.61.27:8080/file/data.zip?folder=forensics
+Ex. files.calpolyfast.com/data.zip?folder=forensics
 
-35.160.61.27:8080/file/data.zip?folder=forensics/q1/
+files.calpolyfast.com/data.zip?folder=forensics/q1/
 
-**URL with bucket**: /file/{name}?bucket={bucketname}
+**URL with bucket**: /{name}?bucket={bucketname}
 
 {bucketname} = name of the bucket
 
