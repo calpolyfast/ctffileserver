@@ -1,0 +1,6 @@
+https://www.files.cppfast.org {
+    proxy / localhost:8000
+}
+https://files.cppfast.org, http://www.files.cppfast.org, http://files.cppfast.org {
+    redir https://www.files.cppfast.org{uri}
+}
