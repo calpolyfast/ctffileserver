@@ -7,15 +7,15 @@ Our simple web server that give us download links to our files on S3
 
 {name} = name of the file in S3
 
-Ex. files.calpolyfast.com/data.zip
+Ex. files.cppfast.org/data.zip
 
 **URL with folder**: /{name}?folder={foldername}
 
 {folder} = name of the folder the file is in
 
-Ex. files.calpolyfast.com/data.zip?folder=forensics
+Ex. files.cppfast.org/data.zip?folder=forensics
 
-files.calpolyfast.com/data.zip?folder=forensics/q1/
+files.cppfast.org/data.zip?folder=forensics/q1/
 
 **URL with bucket**: /{name}?bucket={bucketname}
 
