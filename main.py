@@ -21,7 +21,7 @@ async def file(request, name):
         Handler for sending link for downloading file
     '''
     file_name = name
-    bucket = "calpolyfast-ctf-winter17"
+    bucket = "calpolyfast-ctf-spring17"
 
     # Check if bucket name given
     try:
